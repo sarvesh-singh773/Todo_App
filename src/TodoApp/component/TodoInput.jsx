@@ -29,7 +29,7 @@ function TodoInput() {
   }
 
   return (
-    <form className='w-[100%] flex gap-7 ' onSubmit={getRes}>
+    <form className='w-[100%] flex sm:gap-7 gap-3 ' onSubmit={getRes}>
         <div className='w-[40%] '>
             <input type="text" className='border-[1px] border-[gray] w-full rounded-md py-2 bg-[#d3c9c9]' placeholder='Enter todo item' ref={newItem}/>
         </div>

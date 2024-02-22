@@ -40,7 +40,7 @@ function Maintodo() {
   return (
     <TodoObjcontext.Provider value={{obj , addNewItem , removeItem}}>
     <div className='w-[100%] h-[100vh] flex justify-center'>
-        <div className='w-[50%] border-2 border-[gray] rounded-2xl p-[30px]'>
+        <div className='sm:w-[50%] border-2 border-[gray] rounded-2xl sm:p-[30px] p-[15px]'>
             <TodoHead />
             <TodoInput />
             <Massage/>
