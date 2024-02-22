@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Todoitem from './Todoitem'
+import { TodoObjcontext } from '../store/Todo-obj-store';
 
-function Todoitems(props) {
+function Todoitems() {
+
+  const {obj} = useContext(TodoObjcontext)
   return (
     <div>
         {
-          props.object.map((item , index) =>(
-            <Todoitem item={item} HandalRemove={props.HandalRemove} index ={index}/>
+          obj.map((item , index) =>(
+            <Todoitem item={item} index ={index}/>
           ))
         }
     </div>

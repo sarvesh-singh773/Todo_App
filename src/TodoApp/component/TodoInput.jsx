@@ -1,8 +1,10 @@
 
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
+import { TodoObjcontext } from '../store/Todo-obj-store';
 
-function TodoInput(props) {
+function TodoInput() {
 
+   const {addNewItem}= useContext(TodoObjcontext)
   const newItem = useRef();
   const newDate  = useRef();
 
@@ -22,7 +24,7 @@ function TodoInput(props) {
     const duedate = newDate.current.value;
     newDate.current.value = "";
     newItem.current.value = "";
-    props.HandalInput(todoitem , duedate);
+    addNewItem(todoitem , duedate);
     
   }
 

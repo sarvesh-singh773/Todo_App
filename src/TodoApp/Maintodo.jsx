@@ -2,24 +2,30 @@ import React, { useState } from 'react'
 import TodoHead from './component/TodoHead'
 import TodoInput from './component/TodoInput'
 import Todoitems from './component/Todoitems'
+import Massage from './component/Massage'
+import { TodoObjcontext } from './store/Todo-obj-store'
 
 function Maintodo() {
-    const objData = [
-        {item:"Suger" , date:"01-02-2024"},
-        {item:"Suger" , date:"01-02-2024"},
-        {item:"Suger" , date:"01-02-2024"},
-    ]
+    
 
-    const [obj , setObj] = useState(objData);
+    const [obj , setObj] = useState([]);
 
-    function HandalInput(todoitem , duedate)
+    function addNewItem(todoitem , duedate)
     {
       //console.warn(todoitem , duedate);
-      let newArr = [...obj , {item:todoitem , date:duedate}];
-      setObj(newArr);
+      if(todoitem === "" && duedate === "")
+      {
+        alert("Please enter the todo item and duedate");
+      }
+      else
+      {
+        let newArr = [...obj , {item:todoitem , date:duedate}];
+         setObj(newArr);
+      }
+      
     }
 
-    function HandalRemove(index)
+    function removeItem(index)
     {
        let newArr = [];
        for(let i=0; i<obj.length; i++)
@@ -32,13 +38,16 @@ function Maintodo() {
        setObj(newArr);
     }
   return (
+    <TodoObjcontext.Provider value={{obj , addNewItem , removeItem}}>
     <div className='w-[100%] h-[100vh] flex justify-center'>
         <div className='w-[50%] border-2 border-[gray] rounded-2xl p-[30px]'>
             <TodoHead />
-            <TodoInput HandalInput={HandalInput}/>
-            <Todoitems object = {obj} HandalRemove={HandalRemove}/>
+            <TodoInput />
+            <Massage/>
+            <Todoitems />
         </div>
     </div>
+    </TodoObjcontext.Provider>
   )
 }
 

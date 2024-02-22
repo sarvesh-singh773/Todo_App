@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TodoObjcontext } from '../store/Todo-obj-store'
 
 function Todoitem(props) {
+  const {removeItem}= useContext(TodoObjcontext)
   return (
     <div className='w-[100%] flex gap-7 border-b-[1px] border-[gray]'>
         <div className='w-[40%] my-3'>
@@ -11,7 +13,7 @@ function Todoitem(props) {
         </div>
         <div className='w-[15%] bg-[green] rounded-xl my-3 text-center'>
             <button className='text-[white] text-[18px] pt-1 '
-              onClick={()=>props.HandalRemove(props.index)}
+              onClick={()=>removeItem(props.index)}
             >Remove</button>
         </div>
     </div>
