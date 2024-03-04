@@ -1,27 +1,48 @@
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react'
 import TodoHead from './component/TodoHead'
 import TodoInput from './component/TodoInput'
 import Todoitems from './component/Todoitems'
 import Massage from './component/Massage'
 import { TodoObjcontext } from './store/Todo-obj-store'
 
-function Maintodo() {
-    
+const todoItemsReducer = (currItem ,action) => {
 
-    const [obj , setObj] = useState([]);
-
-    function addNewItem(todoitem , duedate)
+     let newArr = currItem;
+    if(action.type === "NEW_ITEM")
     {
-      //console.warn(todoitem , duedate);
-      if(todoitem === "" && duedate === "")
+      if(action.payload.todoitem === "" && action.payload.duedate === "")
       {
         alert("Please enter the todo item and duedate");
       }
       else
       {
-        let newArr = [...obj , {item:todoitem , date:duedate}];
-         setObj(newArr);
+        newArr = [...currItem , {item:action.payload.todoitem , date: action.payload.duedate}];
       }
+    }
+    else if(action.type === "DELETE_ITEM")
+    {
+
+    }
+  
+     return newArr;
+}
+
+function Maintodo() {
+    
+    const [obj , dispatchTodoItems] = useReducer(todoItemsReducer , []);
+    //const [obj , setObj] = useState([]);
+
+    function addNewItem(todoitem , duedate)
+    {
+      const newItemAction = {
+
+        type : "NEW_ITEM",
+        payload: {
+          todoitem,
+          duedate
+        }
+      }
+      dispatchTodoItems(newItemAction);
       
     }
 
